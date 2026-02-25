@@ -1,4 +1,4 @@
-# Prediction Market ML
+# Resolved
 
 Machine learning pipeline to predict whether prediction markets (Kalshi/Polymarket) resolve YES or NO based on trade-level data and market metadata. Built with DuckDB, scikit-learn, and XGBoost.
 
