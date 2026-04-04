@@ -13,6 +13,12 @@ Entry format:
 
 ---
 
+## 2026-04-04 | Feedforward Neural Network
+- **what:** Implemented PyTorch feedforward NN (64→32→1, ReLU, sigmoid). Added sklearn-compatible `NNClassifier` wrapper with early stopping. Created runner script with naive baseline comparison and model/figure output.
+- **files:** `src/models/neural.py`, `scripts/05_train_neural.py`
+- **decisions:** Used `NNClassifier` wrapper so `evaluate()` from `src/models/evaluate.py` works unchanged. Early stopping on training loss (patience=8). Saves weights as `.pt`.
+- **open:** Compare NN against classical results; consider adding NLP features (Step 9).
+
 ## 2026-02-24 | Agent Template Standardization
 - **what:** Applied `agent-template` structures retroactively to the codebase. Extracted logic from monolithic scripts to modular files nested across `src/data/` and `src/models/`. Updated code styles via Ruff and generated project `README.md`.
 - **files:** `README.md`, `scripts/[01-04]*.py`, `src/data/*.py`, `src/models/*.py`, `docs/*`.
