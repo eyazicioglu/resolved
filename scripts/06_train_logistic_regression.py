@@ -11,7 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import RandomizedSearchCV
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.models.classical import train_logistic_regression
-from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.metrics import classification_report, roc_auc_score, roc_curve
 from sklearn.preprocessing import StandardScaler
 
 # Hide the annoying Scikit-Learn FutureWarnings
@@ -131,6 +131,9 @@ def analyze_step(step_idx):
     
     # 7. Print Results
     print(f"AUC-ROC Score: {auc:.4f}\n")
+    pred = (preds > 0.5).astype(int)
+    print("Test-set precision/recall/F1:")
+    print(classification_report(y_test, pred, target_names=["NO", "YES"], digits=4))
     print("Feature Weights (Ranked by Importance):")
     
     feature_importance = pd.DataFrame({
