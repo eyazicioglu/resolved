@@ -1,0 +1,43 @@
+{
+  "sample_rows": 500000,
+  "sample_tickers": 5000,
+  "train_rows": 400000,
+  "train_tickers": 4000,
+  "holdout_rows": 100000,
+  "holdout_tickers": 1000,
+  "cv": 3,
+  "n_iter": 12,
+  "features": [
+    "step_idx",
+    "yes_price",
+    "cum_volume",
+    "market_duration_hours",
+    "category_enc"
+  ],
+  "param_dist": {
+    "n_estimators": [
+      100,
+      200,
+      500
+    ],
+    "max_depth": [
+      8,
+      16,
+      32,
+      null
+    ],
+    "min_samples_leaf": [
+      1,
+      5,
+      20
+    ]
+  },
+  "best_params": {
+    "n_estimators": 500,
+    "min_samples_leaf": 20,
+    "max_depth": 8
+  },
+  "best_cv_auc": 0.8691086128466466,
+  "holdout_auc": 0.8860895684506218,
+  "holdout_accuracy": 0.74011
+}

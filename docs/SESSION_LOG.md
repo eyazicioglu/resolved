@@ -13,6 +13,12 @@ Entry format:
 
 ---
 
+## 2026-04-27 | Random Forest V2 Search
+- **what:** Added Random Forest hyperparameter search for `aggregated_markets_v2.parquet`. Ran 12-candidate, 3-fold grouped CV on 5,000 stratified tickers and saved ranked results plus best params.
+- **files:** `scripts/06_random_forest_search_v2.py`, `data/processed/rf_search_v2/*`, `docs/SESSION_LOG.md`
+- **decisions:** Used ticker-grouped CV to avoid leaking the same market across train/validation folds. Kept previous RF search space: `n_estimators`, `max_depth`, `min_samples_leaf`.
+- **open:** Run with larger `--max-tickers` if more compute time is available.
+
 ## 2026-04-04 | Feedforward Neural Network
 - **what:** Implemented PyTorch feedforward NN (64→32→1, ReLU, sigmoid). Added sklearn-compatible `NNClassifier` wrapper with early stopping. Created runner script with naive baseline comparison and model/figure output.
 - **files:** `src/models/neural.py`, `scripts/05_train_neural.py`
