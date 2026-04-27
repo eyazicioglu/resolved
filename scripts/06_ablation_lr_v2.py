@@ -6,6 +6,7 @@ import numpy as np
 import duckdb
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import RandomizedSearchCV
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.models.classical import train_logistic_regression
 from sklearn.metrics import roc_auc_score
 from sklearn.preprocessing import StandardScaler
@@ -78,41 +79,19 @@ def load_market_prefix(step_idx: int) -> pd.DataFrame:
 def tune_and_run_regression(X_train, y_train, X_test, y_test):
     """Uses GridSearchCV to find the absolute best hyperparameters based on the specified search space."""
     
-    print("  Starting Grid Search... (Running silently without warnings!)")
+    print("  Starting Search...")
     
     # 1. Define the base model
     # We keep class_weight='balanced' to handle skewed YES/NO ratios, and random_state for reproducibility.
     base_model = LogisticRegression(class_weight='balanced', random_state=42)
     
-    # 2. Define the search space
-    param_grid = {
-        'C': [0.001, 0.01, 0.1, 1.0, 10.0],
-        'solver': ['lbfgs', 'saga'],
-        'max_iter': [500]
-    }
-    
-    search = RandomizedSearchCV(
-        estimator=base_model, 
-        param_distributions=param_grid, 
-        n_iter=8, 
-        cv=3, 
-        scoring='roc_auc', 
-        n_jobs=-1, 
-        random_state=42
-    )
-    
-    # 4. Run the search
-    search.fit(X_train, y_train)
-    
-    # 5. Extract the winner
-    best_model = search.best_estimator_
-    print(f"  [WINNER] Best Params: {search.best_params_}")
+    model = train_logistic_regression(X_train, y_train)
     
     # 6. Test the champion model
-    preds = best_model.predict_proba(X_test)[:, 1]
+    preds = model.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, preds)
     
-    return auc, best_model.coef_[0]
+    return auc, model.coef_[0]
 
 def analyze_step(step_idx):
     """loads a prefix of each market up to the requested step cutoff"""
