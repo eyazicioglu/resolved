@@ -164,12 +164,12 @@ def main():
     fig, ax = plt.subplots(figsize=(7, 6))
     for result in milestone_results:
         fpr, tpr, _ = roc_curve(result["y_test"], result["prob"])
-        ax.plot(fpr, tpr, label=f"step {result['step']} (AUC={result['auc']:.4f})", linewidth=1.5)
+        ax.plot(fpr, tpr, label=f"Trajectory Percentage: {result['step']}% (AUC={result['auc']:.4f})", linewidth=1.5)
 
     ax.plot([0, 1], [0, 1], "k--", linewidth=0.8, label="random")
     ax.set_xlabel("false positive rate")
     ax.set_ylabel("true positive rate")
-    ax.set_title("ROC curves by milestone")
+    ax.set_title("ROC Curves by Trajectory Percentage")
     ax.legend(loc="lower right", fontsize=8)
     ax.grid(True, alpha=0.3)
     fig.tight_layout()

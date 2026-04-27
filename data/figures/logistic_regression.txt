@@ -193,4 +193,4 @@ category_Entertainment -0.085614
       category_Esports  0.000000
            trade_count  0.000000
 
-saved data/figures/roc_logistic_regression.png
+saved /home/river/Documents/03-github/resolved/data/figures/roc_logistic_regression.png
