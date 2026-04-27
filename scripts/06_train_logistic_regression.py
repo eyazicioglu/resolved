@@ -171,7 +171,7 @@ def main():
     ax.grid(True, alpha=0.3)
     fig.tight_layout()
 
-    roc_path = FIGURES / "roc_logistic_regression_milestones.png"
+    roc_path = FIGURES / "roc_logistic_regression.png"
     fig.savefig(roc_path, dpi=150)
     plt.close(fig)
     print(f"\nsaved {roc_path}")

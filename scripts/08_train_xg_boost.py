@@ -1,12 +1,15 @@
 import sys
 import warnings
 from pathlib import Path
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.models.classical import train_logistic_regression, train_xgboost
-from sklearn.metrics import classification_report, roc_auc_score
+from sklearn.metrics import classification_report, roc_auc_score, roc_curve
 from sklearn.preprocessing import StandardScaler
 
 # Hide the annoying Scikit-Learn FutureWarnings
@@ -14,8 +17,10 @@ warnings.filterwarnings('ignore')
 
 # ── Paths ──
 ROOT = Path(__file__).resolve().parents[1]
+FIGURES = ROOT / "data" / "figures"
 DATA_PATH = str(ROOT / "data" / "processed" / "aggregated_markets_v2.parquet").replace('\\', '/')
 CUTOFF_DATE = "2025-10-01"
+FIGURES.mkdir(exist_ok=True, parents=True)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.data.split import split_by_time  # noqa: E402
@@ -133,14 +138,40 @@ def analyze_step(step_idx):
     
     print(feature_importance[['Feature', 'Weight']].to_string(index=False))
 
+    return {
+        "step": step_idx,
+        "auc": auc,
+        "prob": preds,
+        "y_test": y_test.to_numpy(),
+    }
+
 def main():
     print(f"Targeting dataset: {DATA_PATH}")
     
     # Testing the market at various points of its lifespan
     milestones = [50, 60, 70, 80, 90]
+    milestone_results = []
     
     for step in milestones:
-        analyze_step(step)
+        milestone_results.append(analyze_step(step))
+
+    fig, ax = plt.subplots(figsize=(7, 6))
+    for result in milestone_results:
+        fpr, tpr, _ = roc_curve(result["y_test"], result["prob"])
+        ax.plot(fpr, tpr, label=f"step {result['step']} (AUC={result['auc']:.4f})", linewidth=1.5)
+
+    ax.plot([0, 1], [0, 1], "k--", linewidth=0.8, label="random")
+    ax.set_xlabel("false positive rate")
+    ax.set_ylabel("true positive rate")
+    ax.set_title("ROC curves by milestone - xgboost")
+    ax.legend(loc="lower right", fontsize=8)
+    ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+
+    roc_path = FIGURES / "roc_xgboost.png"
+    fig.savefig(roc_path, dpi=150)
+    plt.close(fig)
+    print(f"\nsaved {roc_path}")
 
 if __name__ == "__main__":
     main()
