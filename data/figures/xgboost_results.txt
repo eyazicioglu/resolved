@@ -1,0 +1,196 @@
+============================================================
+  ANALYZING STEP 50 (market prefix cutoff)
+============================================================
+  Starting Search...
+Fitting 3 folds for each of 20 candidates, totalling 60 fits
+  Best params: {'subsample': 0.7, 'reg_lambda': 1.0, 'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+  Best CV (validation) AUC: 0.8297
+AUC-ROC Score: 0.8509
+
+Test-set precision/recall/F1:
+              precision    recall  f1-score   support
+
+          NO     0.9247    0.8061    0.8613    277696
+         YES     0.4047    0.6675    0.5039     54843
+
+    accuracy                         0.7832    332539
+   macro avg     0.6647    0.7368    0.6826    332539
+weighted avg     0.8389    0.7832    0.8024    332539
+
+Feature Weights (Ranked by Importance):
+               Feature   Weight
+        last_yes_price 0.569780
+         avg_yes_price 0.241846
+           price_slope 0.070299
+      category_Weather 0.023330
+ market_duration_hours 0.016231
+category_Entertainment 0.016071
+          total_volume 0.012503
+      category_Finance 0.012344
+             price_std 0.011141
+       category_Sports 0.007834
+        category_Other 0.005128
+        category_Media 0.004874
+ category_World Events 0.003207
+ category_Science/Tech 0.003120
+     category_Politics 0.002292
+      category_Esports 0.000000
+           trade_count 0.000000
+
+============================================================
+  ANALYZING STEP 60 (market prefix cutoff)
+============================================================
+  Starting Search...
+Fitting 3 folds for each of 20 candidates, totalling 60 fits
+  Best params: {'subsample': 0.7, 'reg_lambda': 1.0, 'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+  Best CV (validation) AUC: 0.8513
+AUC-ROC Score: 0.8600
+
+Test-set precision/recall/F1:
+              precision    recall  f1-score   support
+
+          NO     0.9283    0.8147    0.8678    277696
+         YES     0.4207    0.6812    0.5201     54843
+
+    accuracy                         0.7927    332539
+   macro avg     0.6745    0.7480    0.6940    332539
+weighted avg     0.8446    0.7927    0.8105    332539
+
+Feature Weights (Ranked by Importance):
+               Feature   Weight
+        last_yes_price 0.586399
+         avg_yes_price 0.235187
+           price_slope 0.079534
+      category_Weather 0.016754
+category_Entertainment 0.015921
+          total_volume 0.012889
+ market_duration_hours 0.012129
+             price_std 0.009860
+      category_Finance 0.009041
+       category_Sports 0.007340
+        category_Other 0.004111
+        category_Media 0.003454
+ category_World Events 0.002701
+ category_Science/Tech 0.002446
+     category_Politics 0.002232
+      category_Esports 0.000000
+           trade_count 0.000000
+
+============================================================
+  ANALYZING STEP 70 (market prefix cutoff)
+============================================================
+  Starting Search...
+Fitting 3 folds for each of 20 candidates, totalling 60 fits
+  Best params: {'subsample': 0.7, 'reg_lambda': 1.0, 'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+  Best CV (validation) AUC: 0.8824
+AUC-ROC Score: 0.8714
+
+Test-set precision/recall/F1:
+              precision    recall  f1-score   support
+
+          NO     0.9381    0.8162    0.8729    277696
+         YES     0.4386    0.7272    0.5472     54843
+
+    accuracy                         0.8015    332539
+   macro avg     0.6883    0.7717    0.7100    332539
+weighted avg     0.8557    0.8015    0.8192    332539
+
+Feature Weights (Ranked by Importance):
+               Feature   Weight
+        last_yes_price 0.610453
+         avg_yes_price 0.226118
+           price_slope 0.080483
+category_Entertainment 0.016783
+          total_volume 0.012788
+ market_duration_hours 0.009293
+      category_Weather 0.008694
+             price_std 0.008087
+       category_Sports 0.007305
+      category_Finance 0.006403
+        category_Other 0.004874
+        category_Media 0.002784
+     category_Politics 0.002227
+ category_World Events 0.001995
+ category_Science/Tech 0.001711
+      category_Esports 0.000000
+           trade_count 0.000000
+
+============================================================
+  ANALYZING STEP 80 (market prefix cutoff)
+============================================================
+  Starting Search...
+Fitting 3 folds for each of 20 candidates, totalling 60 fits
+  Best params: {'subsample': 0.7, 'reg_lambda': 1.0, 'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+  Best CV (validation) AUC: 0.9215
+AUC-ROC Score: 0.8843
+
+Test-set precision/recall/F1:
+              precision    recall  f1-score   support
+
+          NO     0.9404    0.8357    0.8850    277696
+         YES     0.4680    0.7319    0.5709     54843
+
+    accuracy                         0.8186    332539
+   macro avg     0.7042    0.7838    0.7280    332539
+weighted avg     0.8625    0.8186    0.8332    332539
+
+Feature Weights (Ranked by Importance):
+               Feature   Weight
+        last_yes_price 0.616749
+           price_slope 0.204658
+         avg_yes_price 0.104995
+      category_Weather 0.012097
+category_Entertainment 0.012091
+          total_volume 0.010485
+             price_std 0.008252
+ market_duration_hours 0.007423
+      category_Finance 0.005821
+        category_Other 0.005579
+       category_Sports 0.005347
+        category_Media 0.002208
+ category_World Events 0.001684
+     category_Politics 0.001471
+ category_Science/Tech 0.001140
+      category_Esports 0.000000
+           trade_count 0.000000
+
+============================================================
+  ANALYZING STEP 90 (market prefix cutoff)
+============================================================
+  Starting Search...
+Fitting 3 folds for each of 20 candidates, totalling 60 fits
+  Best params: {'subsample': 0.7, 'reg_lambda': 1.0, 'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+  Best CV (validation) AUC: 0.9517
+AUC-ROC Score: 0.8990
+
+Test-set precision/recall/F1:
+              precision    recall  f1-score   support
+
+          NO     0.9389    0.8730    0.9048    277696
+         YES     0.5256    0.7126    0.6050     54843
+
+    accuracy                         0.8465    332539
+   macro avg     0.7323    0.7928    0.7549    332539
+weighted avg     0.8708    0.8465    0.8553    332539
+
+Feature Weights (Ranked by Importance):
+               Feature   Weight
+        last_yes_price 0.628185
+           price_slope 0.214142
+         avg_yes_price 0.088235
+      category_Weather 0.017182
+category_Entertainment 0.009348
+             price_std 0.008375
+          total_volume 0.007539
+ market_duration_hours 0.007513
+      category_Finance 0.005159
+       category_Sports 0.005004
+        category_Other 0.003519
+        category_Media 0.002498
+     category_Politics 0.001611
+ category_Science/Tech 0.001169
+ category_World Events 0.000522
+      category_Esports 0.000000
+           trade_count 0.000000
+
+saved data/figures/roc_xgboost.png
