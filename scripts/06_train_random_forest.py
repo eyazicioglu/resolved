@@ -4,11 +4,9 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 import duckdb
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import RandomizedSearchCV
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from src.models.classical import train_logistic_regression
-from sklearn.metrics import roc_auc_score
+from src.models.classical import train_random_forest
+from sklearn.metrics import classification_report, roc_auc_score
 from sklearn.preprocessing import StandardScaler
 
 # Hide the annoying Scikit-Learn FutureWarnings
@@ -81,17 +79,13 @@ def tune_and_run_regression(X_train, y_train, X_test, y_test):
     
     print("  Starting Search...")
     
-    # 1. Define the base model
-    # We keep class_weight='balanced' to handle skewed YES/NO ratios, and random_state for reproducibility.
-    base_model = LogisticRegression(class_weight='balanced', random_state=42)
-    
-    model = train_logistic_regression(X_train, y_train)
+    model = train_random_forest(X_train, y_train)
     
     # 6. Test the champion model
     preds = model.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, preds)
     
-    return auc, model.coef_[0]
+    return auc, model.feature_importances_, preds
 
 def analyze_step(step_idx):
     """loads a prefix of each market up to the requested step cutoff"""
@@ -122,10 +116,13 @@ def analyze_step(step_idx):
     X_test = scaler.transform(df_test[features])
     
     # 6. Run Tuned Model
-    auc, weights = tune_and_run_regression(X_train, y_train, X_test, y_test)
+    auc, weights, preds = tune_and_run_regression(X_train, y_train, X_test, y_test)
+    pred = (preds > 0.5).astype(int)
     
     # 7. Print Results
     print(f"AUC-ROC Score: {auc:.4f}\n")
+    print("Test-set precision/recall/F1:")
+    print(classification_report(y_test, pred, target_names=["NO", "YES"], digits=4))
     print("Feature Weights (Ranked by Importance):")
     
     feature_importance = pd.DataFrame({

@@ -1,4 +1,5 @@
 import numpy as np
+from typing import cast
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import RandomizedSearchCV
@@ -20,13 +21,13 @@ def train_logistic_regression(X_train: np.ndarray, y_train: np.ndarray) -> Logis
         cv=3,
         scoring="roc_auc",
         random_state=42,
-        n_jobs=-1,
+        n_jobs=1,
         verbose=1,
     )
     search.fit(X_train, y_train)
-    print(f"  best params: {search.best_params_}")
-    print(f"  best cv AUC: {search.best_score_:.4f}")
-    return search.best_estimator_
+    print(f"  Best params: {search.best_params_}")
+    print(f"  Best CV (validation) AUC: {search.best_score_:.4f}")
+    return cast(LogisticRegression, search.best_estimator_)
 
 
 def train_random_forest(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassifier:
@@ -44,13 +45,13 @@ def train_random_forest(X_train: np.ndarray, y_train: np.ndarray) -> RandomFores
         cv=3,
         scoring="roc_auc",
         random_state=42,
-        n_jobs=-1,
+        n_jobs=1,
         verbose=1,
     )
     search.fit(X_train, y_train)
-    print(f"  best params: {search.best_params_}")
-    print(f"  best cv AUC: {search.best_score_:.4f}")
-    return search.best_estimator_
+    print(f"  Best params: {search.best_params_}")
+    print(f"  Best CV (validation) AUC: {search.best_score_:.4f}")
+    return cast(RandomForestClassifier, search.best_estimator_)
 
 
 def train_xgboost(X_train: np.ndarray, y_train: np.ndarray) -> XGBClassifier:
@@ -81,10 +82,10 @@ def train_xgboost(X_train: np.ndarray, y_train: np.ndarray) -> XGBClassifier:
         cv=3,
         scoring="roc_auc",
         random_state=42,
-        n_jobs=-1,
+        n_jobs=1,
         verbose=1,
     )
     search.fit(X_train, y_train)
-    print(f"  best params: {search.best_params_}")
-    print(f"  best cv AUC: {search.best_score_:.4f}")
-    return search.best_estimator_
+    print(f"  Best params: {search.best_params_}")
+    print(f"  Best CV (validation) AUC: {search.best_score_:.4f}")
+    return cast(XGBClassifier, search.best_estimator_)
